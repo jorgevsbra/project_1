@@ -10,6 +10,18 @@ piano = {
     "type": "furniture",
 }
 
+crystal_boll= {
+    "name": "crystal_boll",
+    "type": "furniture",
+}
+
+table_of_spells = {
+    "name": "table_of_spells",
+    "type": "furniture",
+}
+
+
+
 queen_bed = {
     "name": "queen bed",
     "type": "furniture",
@@ -59,7 +71,7 @@ key_a = {
 key_b = {
     "name": "key for door b",
     "type": "key",
-    "target": "door_b",
+    "target": door_b,
 }
 
 key_c = {
@@ -110,9 +122,9 @@ object_relations = {
     "piano": [key_a],
     "bedroom 1": [door_a, door_b, door_c, queen_bed],
     "queen bed": [key_b],
-    "bedroom 2": [door_b, double_bed, dresser],
-    "double bed": [key_c],
-    "dresser": [key_d],
+    "bedroom 2": [door_b, table_of_spells, crystal_boll],
+    "table of spells": [key_c],
+    "crystal boll": [key_d],
     "living room": [door_c, door_d, dining_table],
     "outside": [door_d],
     "door a": [game_room, bedroom_1],
