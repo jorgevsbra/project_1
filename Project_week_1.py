@@ -40,6 +40,16 @@ dining_table = {
     "type": "furniture",
 }
 
+toilet = {
+    "name": "toilet",
+    "type": "furniture",
+}
+
+laser_saber = {
+    "name": "Yoda lasersaber",
+    "type": "furniture",
+}
+
 door_a = {
     "name": "door a",
     "type": "door",
@@ -57,6 +67,11 @@ door_c = {
 
 door_d = {
     "name": "door d",
+    "type": "door",
+}
+
+door_e = {
+    "name": "door e",
     "type": "door",
 }
 
@@ -84,6 +99,12 @@ key_d = {
     "target": door_d,
 }
 
+key_e = {
+    "name": "key for door e",
+    "type": "key",
+    "target": door_e,
+}
+
 game_room = {
     "name": "game room",
     "type": "room",
@@ -104,14 +125,19 @@ living_room = {
     "type": "room",
 }
 
+bathroom_1 = {
+    "name": "bathroom",
+    "type": "room",
+}
+
 outside = {
     "name": "outside"
 }
 
 # all_rooms = [game_room, outside, room_1, room_2, living_room]
-all_rooms = [game_room, bedroom_1, bedroom_2, living_room, outside]
+all_rooms = [game_room, bedroom_1, bedroom_2, living_room, bathroom_1, outside]
 
-all_doors = [door_a, door_b, door_c, door_d]
+all_doors = [door_a, door_b, door_c, door_d, door_e]
 
 # define which items/rooms are related
 
@@ -121,15 +147,18 @@ object_relations = {
     "bedroom 1": [door_a, door_b, door_c, queen_bed],
     "queen bed": [key_b],
     "bedroom 2": [door_b, table_of_spells, crystal_ball, double_bed, dresser],
-    "table of spells": [key_c],
-    "crystal ball": [key_d],
-    "living room": [door_c, door_d, dining_table],
+    "double bed": [key_c],
+    "dresser": [key_d],
+    "living room": [door_c, door_d, dining_table, door_e],
     "outside": [door_d],
     "door a": [game_room, bedroom_1],
     "door b": [bedroom_1, bedroom_2],
     "door c": [bedroom_1, living_room],
-    "door d": [living_room, outside]
-}
+    "door d": [living_room, outside],
+    "door e": [living_room, bathroom_1],
+    "dining table": [key_e],
+    "bathroom": [door_e, toilet, laser_saber]
+    }
 
 # define game state. Do not directly change this dict.
 # Instead, when a new game starts, make a copy of this
