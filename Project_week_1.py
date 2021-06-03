@@ -1,4 +1,16 @@
-# define rooms and items
+def bottle():
+    player = []
+    answer = ['red','yellow']
+    print('On the table of spell´s you have 3 bottles of 3 diferent colors; red, yellow and green. You have to choose the colors that make the right potion to open the door b.')
+    while set(player)!= set(answer):
+        player.append(input('Choose 2 diferent colors'))
+        if len(player)==2:
+            if set(player) !=set(answer):
+                player=[]
+                print('You’ve been turned into a frog, try again!')
+    return print('all right! You’re the master of witchcraft, you won!')
+
+#define rooms and items
 
 couch = {
     "name": "couch",
@@ -17,6 +29,11 @@ crystal_ball= {
 
 table_of_spells = {
     "name": "table of spells",
+    "type": "furniture",
+}
+
+cauldron = {
+    "name": "cauldron",
     "type": "furniture",
 }
 
@@ -40,36 +57,6 @@ dining_table = {
     "type": "furniture",
 }
 
-paint = {
-    "name": "paint",
-    "type": "furniture",
-}
-
-laser_saber = {
-    "name": "Yoda lasersaber",
-    "type": "furniture",
-}
-
-chair_1 = {
-    "name": "chair",
-    "type": "furniture",
-}
-
-leather_couch = {
-    "name": "leather couch",
-    "type": "furniture",
-    }
-
-television = {
-    "name": "television",
-    "type": "furniture",
-}
-
-cat = {
-    "name": "cat",
-    "type": "furniture",
-}
-
 door_a = {
     "name": "door a",
     "type": "door",
@@ -87,11 +74,6 @@ door_c = {
 
 door_d = {
     "name": "door d",
-    "type": "door",
-}
-
-door_e = {
-    "name": "door e",
     "type": "door",
 }
 
@@ -119,11 +101,8 @@ key_d = {
     "target": door_d,
 }
 
-key_e = {
-    "name": "key for door e",
-    "type": "key",
-    "target": door_e,
-}
+
+
 
 game_room = {
     "name": "game room",
@@ -145,40 +124,33 @@ living_room = {
     "type": "room",
 }
 
-library_1 = {
-    "name": "library",
-    "type": "room",
-}
-
 outside = {
     "name": "outside"
 }
 
 # all_rooms = [game_room, outside, room_1, room_2, living_room]
-all_rooms = [game_room, bedroom_1, bedroom_2, living_room, library_1, outside]
+all_rooms = [game_room, bedroom_1, bedroom_2, living_room, outside]
 
-all_doors = [door_a, door_b, door_c, door_d, door_e]
+all_doors = [door_a, door_b, door_c, door_d]
 
 # define which items/rooms are related
 
 object_relations = {
-    "game room": [couch, piano, door_a],
-    "piano": [key_a],
+    "game room": [couch, piano,door_a],
+    "piano": [key_a,],
     "bedroom 1": [door_a, door_b, door_c, queen_bed],
     "queen bed": [key_b],
-    "bedroom 2": [door_b, table_of_spells, crystal_ball, double_bed, dresser],
-    "double bed": [key_c],
-    "dresser": [key_d],
-    "living room": [door_d, dining_table, door_e],
+    "bedroom 2": [door_b, table_of_spells,cauldron,crystal_ball, double_bed, dresser],
+    "cauldron": [key_c],
+    "crystal ball": [key_d],
+    "living room": [door_c, door_d, dining_table],
     "outside": [door_d],
     "door a": [game_room, bedroom_1],
     "door b": [bedroom_1, bedroom_2],
-    "door c": [bedroom_1, library_1],
+    "door c": [bedroom_1, living_room],
     "door d": [living_room, outside],
-    "door e": [living_room, library_1],
-    "Yoda lasersaber": [key_e],
-    "library": [door_e, door_c, paint, laser_saber, chair_1, leather_couch, television, cat]
-    }
+
+}
 
 # define game state. Do not directly change this dict.
 # Instead, when a new game starts, make a copy of this
@@ -204,7 +176,10 @@ def start_game():
     Start the game
     """
     print(
-        "You wake up on a couch and find yourself in a strange house with no windows which you have never been to before. \nYou don't remember why you are here and what had happened before. You feel some unknown danger is approaching and you must get out of the house, NOW!")
+        "You wake up on a couch and find yourself in a strange house with no windows which you have never been to before. You don't remember why you are here and what had happened before. You feel some unknown danger is approaching and you must get out of the house, NOW!")
+
+
+
     play_room(game_state["current_room"])
     # play_room(outside)
 
@@ -281,7 +256,12 @@ def examine_item(item_name):
                 else:
                     output += "It is locked but you don't have the key."
             else:
-                if (item["name"] in object_relations and len(object_relations[item["name"]]) > 0):
+                if item["name"] == 'table of spells':
+                    print('The mini game will start') #onde vai ficar uma função
+                    bottle()
+
+
+                elif (item["name"] in object_relations and len(object_relations[item["name"]]) > 0) and (item["name"] !='table of spells'):
                     item_found = object_relations[item["name"]].pop()
                     game_state["keys_collected"].append(item_found)
                     output += "You find " + item_found["name"] + "."
@@ -301,3 +281,65 @@ def examine_item(item_name):
 
 game_state = INIT_GAME_STATE.copy()
 start_game()
+# the next modules should be installed first hand
+# pip install gTTS
+# pip install playsound
+# Import the required module for text
+# to speech conversion
+from gtts import gTTS
+
+# This module is imported so that we can
+# play the converted audio
+import os
+
+# The text that you want to convert to audio
+mytext = 'You escaped the room, Congratulations!'
+
+# Language in which you want to convert
+language = 'en'
+
+# Passing the text and language to the engine,
+# here we have marked slow=False. Which tells
+# the module that the converted audio should
+# have a high speed
+myobj = gTTS(text=mytext, lang=language, slow=False)
+
+# Saving the converted audio in a mp3 file named
+# welcome
+myobj.save("welcome.mp3")
+
+from playsound import playsound
+playsound('welcome.mp3')
+
+#  Image on screen**************************************************************
+
+"""
+Firstly, we will import turtle module. The turtle() method is used to make objects.
+We will create a screen object by using “wn = turtle.Screen()”.
+The addshape() function is used to add a turtle shape to the turtle screen.
+To save the image on the turtle screen it should be in “gif” form."""
+
+import turtle
+
+
+screen = turtle.Screen()
+
+# click the image icon in the top right of the code window to see
+# which images are available in this trinket
+image = "giphy.gif"
+
+# add the shape first then set the turtle shape
+screen.addshape(image)
+turtle.shape(image)
+# defines the color ( red,yellow,blue,lightblue,black,white)
+screen.bgcolor("blue")
+
+
+
+#tells the user to press enter to continue an close the turtle graphic window
+option = input("Press Enter to continue...")
+option
+
+#closes a turtle graphics window
+turtle.bye()
+
