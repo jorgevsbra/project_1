@@ -40,13 +40,33 @@ dining_table = {
     "type": "furniture",
 }
 
-toilet = {
-    "name": "toilet",
+paint = {
+    "name": "paint",
     "type": "furniture",
 }
 
 laser_saber = {
     "name": "Yoda lasersaber",
+    "type": "furniture",
+}
+
+chair_1 = {
+    "name": "chair",
+    "type": "furniture",
+}
+
+leather_couch = {
+    "name": "leather couch",
+    "type": "furniture",
+    }
+
+television = {
+    "name": "television",
+    "type": "furniture",
+}
+
+cat = {
+    "name": "cat",
     "type": "furniture",
 }
 
@@ -125,8 +145,8 @@ living_room = {
     "type": "room",
 }
 
-bathroom_1 = {
-    "name": "bathroom",
+library_1 = {
+    "name": "library",
     "type": "room",
 }
 
@@ -135,7 +155,7 @@ outside = {
 }
 
 # all_rooms = [game_room, outside, room_1, room_2, living_room]
-all_rooms = [game_room, bedroom_1, bedroom_2, living_room, bathroom_1, outside]
+all_rooms = [game_room, bedroom_1, bedroom_2, living_room, library_1, outside]
 
 all_doors = [door_a, door_b, door_c, door_d, door_e]
 
@@ -153,11 +173,11 @@ object_relations = {
     "outside": [door_d],
     "door a": [game_room, bedroom_1],
     "door b": [bedroom_1, bedroom_2],
-    "door c": [bedroom_1, living_room],
+    "door c": [bedroom_1, library_1],
     "door d": [living_room, outside],
-    "door e": [living_room, bathroom_1],
-    "dining table": [key_e],
-    "bathroom": [door_e, toilet, laser_saber]
+    "door e": [living_room, library_1],
+    "cat": [key_e],
+    "library": [door_e, door_c, paint, laser_saber, chair_1, leather_couch, television, cat]
     }
 
 # define game state. Do not directly change this dict.
