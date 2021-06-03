@@ -65,11 +65,6 @@ television = {
     "type": "furniture",
 }
 
-cat = {
-    "name": "cat",
-    "type": "furniture",
-}
-
 door_a = {
     "name": "door a",
     "type": "door",
@@ -177,7 +172,7 @@ object_relations = {
     "door d": [living_room, outside],
     "door e": [living_room, library_1],
     "Yoda lasersaber": [key_e],
-    "library": [door_e, door_c, paint, laser_saber, chair_1, leather_couch, television, cat]
+    "library": [door_e, door_c, paint, laser_saber, chair_1, leather_couch, television]
     }
 
 # define game state. Do not directly change this dict.
@@ -227,10 +222,35 @@ def play_room(room):
             play_room(room)
         elif intended_action == "examine":
             examine_item(input("What would you like to examine?").strip())
+        elif intended_action == "guess":
+            cat(room)
         else:
             print("Not sure what you mean. Type 'explore' or 'examine'.")
             play_room(room)
         linebreak()
+
+def cat(room):
+# import random module
+    import random
+# create a range of random numbers between 1-10
+    n = random.randrange(1,100)
+# take a user input to enter a number
+    guess = int(input("\nThe cat says: miauuu, if you guess the right number, I will tell you, were the key for door e is!\nPlease enter any number: "))
+    while n!= guess: # means if n is not equal to the input guess
+# if guess is smaller than n
+        if guess < n:
+            print("Too low")
+# again ask for input
+            guess = int(input("Enter number again: "))
+# if guess is greater than n
+        elif guess > n:
+            print("Too high!")
+# to again ask for the user input
+            guess = int(input("Enter number again: "))
+# if guess gets equals to n terminate the while loop
+        else:
+            break
+    return("Congratulations !!\nThe key is in Yoda lasersaber !!")
 
 
 def explore_room(room):

@@ -1,3 +1,4 @@
+
 # define rooms and items
 
 couch = {
@@ -185,6 +186,8 @@ object_relations = {
 # dict and use the copy to store gameplay state. This
 # way you can replay the game multiple times.
 
+
+
 INIT_GAME_STATE = {
     "current_room": game_room,
     "keys_collected": [],
@@ -204,7 +207,7 @@ def start_game():
     Start the game
     """
     print(
-        "You wake up on a couch and find yourself in a strange house with no windows which you have never been to before. \nYou don't remember why you are here and what had happened before. You feel some unknown danger is approaching and you must get out of the house, NOW!")
+        "You wake up on a couch and find yourself in a strange house with no windows which you have never been to before. You don't remember why you are here and what had happened before. You feel some unknown danger is approaching and you must get out of the house, NOW!")
     play_room(game_state["current_room"])
     # play_room(outside)
 
@@ -219,6 +222,8 @@ def play_room(room):
     game_state["current_room"] = room
     if (game_state["current_room"] == game_state["target_room"]):
         print("Congrats! You escaped the room!")
+        if (game_state["current_room"] == game_state["library"]):
+            print("The cat knows where the key is. Ask him !!")
     else:
         print("You are now in " + room["name"])
         intended_action = input("What would you like to do? Type 'explore' or 'examine'?").strip()
@@ -301,3 +306,57 @@ def examine_item(item_name):
 
 game_state = INIT_GAME_STATE.copy()
 start_game()
+
+# the next modules should be installed first hand
+# pip install gTTS
+# pip install playsound
+# Import the required module for text
+# to speech conversion
+from gtts import gTTS
+
+import os
+
+mytext = 'You escaped the room, Congratulations!'
+​
+language = 'en'
+​
+myobj = gTTS(text=mytext, lang=language, slow=False)
+​
+# Saving the converted audio in a mp3 file named
+# welcome
+myobj.save("welcome.mp3")
+​
+from playsound import playsound
+playsound('welcome.mp3')
+​
+#  Image on screen**************************************************************
+​
+"""
+Firstly, we will import turtle module. The turtle() method is used to make objects.
+We will create a screen object by using “wn = turtle.Screen()”.
+The addshape() function is used to add a turtle shape to the turtle screen.
+To save the image on the turtle screen it should be in “gif” form."""
+​
+import turtle
+​
+​
+screen = turtle.Screen()
+​
+# click the image icon in the top right of the code window to see
+# which images are available in this trinket
+image = "giphy.gif"
+​
+# add the shape first then set the turtle shape
+screen.addshape(image)
+turtle.shape(image)
+# defines the color ( red,yellow,blue,lightblue,black,white)
+screen.bgcolor("blue")
+​
+​
+​
+#tells the user to press enter to continue an close the turtle graphic window
+option = input("Press Enter to continue...")
+option
+​
+#closes a turtle graphics window
+turtle.bye()
